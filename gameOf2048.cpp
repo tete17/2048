@@ -57,9 +57,9 @@ int gameOf2048::makePlayerChoose() {
 
     unsigned int decision;
     cin >> decision;
-    int tonto;
 
     //TODO for some reason if I input text into decision it loops indefinetly ??
+    // I rather make the input unbuffered
     //Check if input is valid
     while( !(decision == 1 || decision == 2 || decision == 3 || decision == 4) ){
         cout << "Please select a valid option: ";
@@ -101,32 +101,17 @@ void gameOf2048::printboard() {
     //TODO Make it so it actually displays a bit better
     cout << endl << endl;
 
-    printf("---------------------\n");
-    printf("%3d",4);
-
-
-
-
-
-    for (int j = 0; j < sizeOfBoard; ++j) {
-        cout << " ---";
-    }
-    cout << endl;
-
-    for (auto &cell : cells) {
-
-        for (auto &j : cell) {
-            if (j.isEmpty) {
-                cout << "|0|";
+    printf("-----------------\n");
+    for (auto &row : cells) {
+        for (auto &index : row) {
+            if (index.isEmpty) {
+                printf("|  0");
             } else {
-                cout << "|" << j.value << "|";
+                printf("|%3d", index.value);
             }
         }
-        cout << endl;
-        for (int j = 0; j < sizeOfBoard; ++j) {
-            cout << " ---";
-        }
-        cout << endl;
+        printf("|\n");
+        printf("-----------------\n");
     }
 
     cout << "Current Score= " <<this->getScore() << endl;
